@@ -1,7 +1,5 @@
-function randomNumber(min, max) {
-	return Math.floor(Math.random() * (1 + max - min) + min);
-}
 
+	// Declare Variables
 
 var appleCurrentPrice = 100;
 var appleCurrentInventory = 0;
@@ -22,7 +20,26 @@ var pearPrices = [];
 var cashOnHand = 10000;
 
 
- // ALL PRICES ARE IN PENNIES
+   	// Print Information To The Screen
+
+$(document).ready(function(){
+	$('.cash').text((cashOnHand / 100).toFixed(2));
+	});
+
+	$('.applePrice').text("Current Price: $" + (appleCurrentPrice / 100).toFixed(2));
+	$('.orangePrice').text("Current Price: $" + (orangeCurrentPrice / 100).toFixed(2));
+	$('.bananaPrice').text("Current Price: $" + (bananaCurrentPrice / 100).toFixed(2));
+	$('.pearPrice').text("Current Price: $" + (pearCurrentPrice / 100).toFixed(2));
+	$('.appleInv').text("Inventory: " + appleCurrentInventory);
+	$('.orangeInv').text("Inventory: " + orangeCurrentInventory);
+	$('.bananaInv').text("Inventory: " + bananaCurrentInventory);
+	$('.pearInv').text("Inventory: " + pearCurrentInventory);
+
+	// Functions
+
+function randomNumber(min, max) {
+	return Math.floor(Math.random() * (1 + max - min) + min);
+};
 
 function updatePrice(fruitPrice, fruit) {
 		// console.log(fruit + ": " + fruitPrice);
@@ -45,42 +62,34 @@ function updatePrice(fruitPrice, fruit) {
 };
 
 
-// var appleText = "Current Price: $" + (appleCurrentPrice / 100);
+function changePrices() {
+
+	appleCurrentPrice =  updatePrice(appleCurrentPrice, "apple");
+	orangeCurrentPrice = updatePrice(orangeCurrentPrice, "orange");
+	bananaCurrentPrice = updatePrice(bananaCurrentPrice, "banana");
+	pearCurrentPrice = updatePrice(pearCurrentPrice, "pear");
 
 	$('.applePrice').text("Current Price: $" + (appleCurrentPrice / 100).toFixed(2));
 	$('.orangePrice').text("Current Price: $" + (orangeCurrentPrice / 100).toFixed(2));
 	$('.bananaPrice').text("Current Price: $" + (bananaCurrentPrice / 100).toFixed(2));
 	$('.pearPrice').text("Current Price: $" + (pearCurrentPrice / 100).toFixed(2));
-	$('.appleInv').text("Inventory: " + appleCurrentInventory);
-	$('.orangeInv').text("Inventory: " + orangeCurrentInventory);
-	$('.bananaInv').text("Inventory: " + bananaCurrentInventory);
-	$('.pearInv').text("Inventory: " + pearCurrentInventory);
-
-$(document).ready(function(){
-	$('.cash').text((cashOnHand / 100).toFixed(2));
-
-});
-
-
-
-setInterval(function() {changePrices()}, 15000);
-
-
-
-function changePrices() {
-
-//console.log("A: " + appleCurrentPrice + " O: " + orangeCurrentPrice + " B: " + bananaCurrentPrice + " P: " + pearCurrentPrice)
-appleCurrentPrice =  updatePrice(appleCurrentPrice, "apple");
-orangeCurrentPrice = updatePrice(orangeCurrentPrice, "orange");
-bananaCurrentPrice = updatePrice(bananaCurrentPrice, "banana");
-pearCurrentPrice = updatePrice(pearCurrentPrice, "pear");
-
-$('.applePrice').text("Current Price: $" + (appleCurrentPrice / 100).toFixed(2));
-$('.orangePrice').text("Current Price: $" + (orangeCurrentPrice / 100).toFixed(2));
-$('.bananaPrice').text("Current Price: $" + (bananaCurrentPrice / 100).toFixed(2));
-$('.pearPrice').text("Current Price: $" + (pearCurrentPrice / 100).toFixed(2));
 
 };
+
+function calcAverage (pricesArray, fruitToAvg) {
+
+	fruitToAvg = 0;
+
+	for (var i = 0; i < pricesArray.length; i++) {
+		fruitToAvg += pricesArray[i]; 
+	}
+ // console.log(fruitToAvg);
+	fruitToAvg /= pricesArray.length;
+ // console.log(fruitToAvg);
+	return fruitToAvg;
+
+};
+
 
 $('.buyApple').on("click", function() {
 	appleCurrentInventory += 1;
@@ -127,18 +136,7 @@ $('.buyPear').on("click", function() {
 	$('.pearAvgPrice').text("Average Price: $" + (pearAveragePrice / 100).toFixed(2));
 });
 
+	// Kick off the Intervals
 
+setInterval(function() {changePrices()}, 15000);
 
-function calcAverage (pricesArray, fruitToAvg) {
-
-fruitToAvg = 0;
-
-for (var i = 0; i < pricesArray.length; i++) {
-	fruitToAvg += pricesArray[i]; 
-}
-console.log(fruitToAvg);
-fruitToAvg /= pricesArray.length;
-console.log(fruitToAvg);
-return fruitToAvg;
-
-};
