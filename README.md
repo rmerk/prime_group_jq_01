@@ -1,4 +1,7 @@
 # Prime Group jQuery Challenge
+*** My part in this project ***
+I worked in a team with three other people, where we all contributed our problem solving skills to complete this program.
+
 jQuery is great! It allows us to do so many things! You and your group will need to flex everything you know about 
 Javascript, jQuery, and Bootstrap to tackle this challenge. 
 
